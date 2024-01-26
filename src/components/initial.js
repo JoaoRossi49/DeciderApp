@@ -4,11 +4,23 @@ import { useRef, useState } from 'react';
 const Initial = () => {
     const textInput = useRef();
     const [showNext, setShowNext] = useState(false);
+    const [showError, setShowError] = useState(false);
 
     const handleChange = () => {
         console.log(textInput.current.value.lenght)
-        if(textInput.current.value.length >= 5) setShowNext(true)
+        if (textInput.current.value.length >= 5) setShowNext(true)
         else setShowNext((false));
+    }
+
+    const handleSubmit = () => {
+        const value = textInput.current.value;
+
+        if (value.length >= 30) {
+            setShowError(true)
+            return false
+        }
+
+        alert('Next')
     }
 
     return (
@@ -25,9 +37,16 @@ const Initial = () => {
             {showNext &&
                 <button
                     className="btn"
+                    onClick={handleSubmit}
                 >
                     Next
                 </button>
+            }
+
+            {showError &&
+                <div className='error'>
+                    The question is too long
+                </div>
             }
 
         </div>
