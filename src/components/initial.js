@@ -38,7 +38,7 @@ const Initial = () => {
 
             {showNext &&
                 <button
-                    className="btn"
+                    className="btn animate__animated animate__bounce"
                     onClick={handleSubmit}
                 >
                     Next
