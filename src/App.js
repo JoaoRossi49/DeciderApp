@@ -1,11 +1,13 @@
 import { useContext } from 'react';
 import { MyContext } from './context';
+import { SwitchTransition, CSSTransition} from 'react-transition-group';
 
 import 'animate.css';
 import './assets/App.css';
 import Initial from './components/initial';
 import Confirm from './components/confirm';
 import Result from './components/result';
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
   const context = useContext(MyContext)
@@ -19,8 +21,18 @@ const App = () => {
 
 
   return (
-    <div className="container">
-      {handleComponent()}
+    <div>
+      <div className="container">
+        <SwitchTransition mode="out-in">
+          <CSSTransition
+            key={context.state.screen}
+            timeout={500}
+          >
+            {handleComponent()}
+          </CSSTransition>
+        </SwitchTransition>
+      </div>
+      <ToastContainer/>
     </div>
   );
 }
